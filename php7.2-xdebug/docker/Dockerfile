@@ -1,9 +1,10 @@
-FROM php:5.6.40-alpine
+FROM php:7.2-alpine
 
-RUN apk add --no-cache wget autoconf gcc g++ make sed icu-dev
-RUN apk --update linux-headers
+RUN apk add --no-cache wget autoconf gcc g++ make sed icu-dev 
+RUN apk add --update linux-headers
+
 RUN docker-php-ext-configure intl && docker-php-ext-install intl
-RUN pecl channel-update pecl.php.net && pecl install xdebug-2.5.5
+RUN pecl channel-update pecl.php.net && pecl install xdebug-3.1.6
 
 COPY ./php.ini /usr/local/etc/php.ini
 COPY ./php.ini /usr/local/etc/php/conf.d/docker-php-ext-intl.ini
